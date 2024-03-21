@@ -34,6 +34,9 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
+
   publish_report:
     name: Publish report
     if: "success() || needs.test.result == 'failure'"
