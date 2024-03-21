@@ -5,7 +5,12 @@ test('1parrainage', async ({ page }) => {
   expect(process.env.password).toBeDefined();
 
   await page.goto('https://www.1parrainage.com/offre_parrainage_Nuki.php?cat=1&catOK=1&texte=Nuki');
-  await page.getByRole('button', { name: 'Tout accepter et continuer' }).click();
+
+  const cookiesButton = page.getByRole('button', { name: 'Tout accepter et continuer' });
+  const visible = await cookiesButton.isVisible()
+  if (visible) {
+    await cookiesButton.click();
+  }
   await expect(page.getByRole('link', { name: 'Nuki', exact: true })).toBeVisible();
 
   const firstGodFather = await page.$$eval("body", (body) => {
