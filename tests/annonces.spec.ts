@@ -6,7 +6,7 @@ test('1parrainage', async ({ page }) => {
 
   await page.goto('https://www.1parrainage.com/offre_parrainage_Nuki.php?cat=1&catOK=1&texte=Nuki');
 
-  const cookiesButton = page.getByRole('button', { name: 'Tout accepter et continuer' });
+  const cookiesButton = page.getByRole('button', { name: 'Accept all' });
   const visible = await cookiesButton.isVisible()
   if (visible) {
     await cookiesButton.click();
