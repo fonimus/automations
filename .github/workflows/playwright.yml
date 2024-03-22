@@ -2,7 +2,7 @@ name: Playwright Tests
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 8,12 * * *'
+    - cron: '0 8,12,16,20 * * *'
   push:
     branches: [ main ]
   pull_request:
@@ -24,8 +24,7 @@ jobs:
     - name: 'Create env file'
       run: |
         touch .env
-        echo email=${{ secrets.EMAIL }} >> .env
-        echo password=${{ secrets.PASSWORD }} >> .env
+        echo ACCOUNTS=${{ secrets.ACCOUNTS }} >> .env
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4
