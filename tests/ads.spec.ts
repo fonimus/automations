@@ -10,7 +10,7 @@ type Account = {
 expect(process.env.ACCOUNTS).toBeDefined();
 const accounts: Account[] = []
 for (let account of process.env.ACCOUNTS.split(",")) {
-    const [pseudo, email, password] = account.split("|")
+    const [pseudo, email, password] = account.split(":")
     accounts.push({pseudo, email, password})
 }
 const pseudoList = accounts.map(a => a.pseudo);
