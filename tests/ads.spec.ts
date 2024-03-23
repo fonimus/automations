@@ -1,6 +1,5 @@
 import {expect, Locator, test} from '@playwright/test';
 
-
 type Account = {
     pseudo: string,
     email: string,
@@ -17,43 +16,35 @@ const pseudoList = accounts.map(a => a.pseudo);
 
 const domain = "www.1parrainage.com";
 
-const adNames = ["Nuki", "Boursobank"];
+const adNames = ["Nuki", "Boursobank", "Boursorama Banque"];
 
 async function findAd(ads: Array<Locator>, adName: string) {
+    const ad = undefined
     for (const ad of ads) {
         const imageSource = await ad.locator("..").locator("..").locator("..").locator("div").first().locator("img").getAttribute("src")
         if (imageSource.toLowerCase().includes(adName.toLowerCase())) {
             return ad
         }
     }
+    expect(ad, `Should find add image for name ${adName}`).toBeDefined();
 }
 
-test.use({ locale: 'fr-FR' });
+test.use({locale: 'fr-FR'});
 
 for (let adName of adNames) {
     test(`1parrainage - ${adName}`, async ({page, context}) => {
-        await context.clearCookies();
-        await context.addCookies([{
-            domain,
-            httpOnly: false,
-            name: "euconsent-v2",
-            path: "/",
-            sameSite: "Lax",
-            secure: true,
-            expires: 100,
-            value: "CP6e-8AP6e-8ABcAJEENApEgAP_gAH_gAAqIIzER_C9MTWNjUX58Afs0aYxH1gACoGQABACJgygBCAPA8IQEwGAYIAVAAogKgAAAoiZBAAAlCAlAAAEAQAAAASCMAEEAAAAAIKAAgAARAgEACAhBEQAAEAIAAABBABAAkAAEQBoAQAAAAQAAAAAAAAAgAACBAAQIAAAAAQAAAAAAAEgAgAAAAAAAAAAAAFBGYAMwVJiABsCAkJgBwigRACCsAAAAQAAAAQMEAAAQAAHBCACgwCAAAAABEBAAAAFEQAIAAAIAEIAAAACAAAAAABAAAAAAAAAAQAAAAAIAAAAAEAACAAAABAAAAIAAAAEAAIAAIACAAAAAAEAAAAAAAAAAAYAAAAAAAAAAAAAAAAAAgAEAAAAAAAAAAAAAAAA.x_UIgJQ.IIzER_C9MTWNjUX58Afs0aYxX1gACoGQABACJgygBCAPA8IQE0GAYIAVAAogKgAAAoiZBAAAlCAlAAAEAQAAAASCMAEEAAAAAIKAAgAARAgEACAhBEQAAEAIAAABBABAAkABEQBoAQAAAAQAgAAAAAAAgAADBAAQIAAAAAQAAAAAAAEgAgAAAAAAAAAAAAFA.4YpATgBGACyAF0ANgAjwBiAE3AKkAcUA9YCSwHqgREAiSBKICWIEtQJfgTOAwYBhYDmQHTgOwggYBCyCQwEjEKCwoMBQiCnUFZ4LMwWjgt9Bc6C8kF-YMUgAmAEgAQABUAGQAaABCACYAJgAYAEAASA",
-        },{
-            domain: "consentframework.com",
-            httpOnly: false,
-            name: "euconsent-v2",
-            path: "/",
-            sameSite: "Lax",
-            secure: true,
-            expires: 100,
-            value: "CP6e-8AP6e-8ABcAJEENApEgAP_gAH_gAAqIIzER_C9MTWNjUX58Afs0aYxH1gACoGQABACJgygBCAPA8IQEwGAYIAVAAogKgAAAoiZBAAAlCAlAAAEAQAAAASCMAEEAAAAAIKAAgAARAgEACAhBEQAAEAIAAABBABAAkAAEQBoAQAAAAQAAAAAAAAAgAACBAAQIAAAAAQAAAAAAAEgAgAAAAAAAAAAAAFBGYAMwVJiABsCAkJgBwigRACCsAAAAQAAAAQMEAAAQAAHBCACgwCAAAAABEBAAAAFEQAIAAAIAEIAAAACAAAAAABAAAAAAAAAAQAAAAAIAAAAAEAACAAAABAAAAIAAAAEAAIAAIACAAAAAAEAAAAAAAAAAAYAAAAAAAAAAAAAAAAAAgAEAAAAAAAAAAAAAAAA.x_UIgJQ.IIzER_C9MTWNjUX58Afs0aYxX1gACoGQABACJgygBCAPA8IQE0GAYIAVAAogKgAAAoiZBAAAlCAlAAAEAQAAAASCMAEEAAAAAIKAAgAARAgEACAhBEQAAEAIAAABBABAAkABEQBoAQAAAAQAgAAAAAAAgAADBAAQIAAAAAQAAAAAAAEgAgAAAAAAAAAAAAFA.4YpATgBGACyAF0ANgAjwBiAE3AKkAcUA9YCSwHqgREAiSBKICWIEtQJfgTOAwYBhYDmQHTgOwggYBCyCQwEjEKCwoMBQiCnUFZ4LMwWjgt9Bc6C8kF-YMUgAmAEgAQABUAGQAaABCACYAJgAYAEAASA",
-        }])
+        await page.goto(`https://${domain}/offre_parrainage_${adName.replace(" ", "-")}.php`);
 
-        await page.goto(`https://${domain}/offre_parrainage_${adName}.php`);
+        try {
+            await page.getByRole('button', {name: 'Tout accepter et continuer'}).click();
+        } catch (e) {
+            // nothing to do
+        }
+
+        const closeButtons = await page.getByTitle('close').all();
+        for (let closeButton of closeButtons) {
+            await closeButton.click()
+        }
 
         await expect(page.getByRole('link', {
             name: adName,
@@ -76,10 +67,11 @@ for (let adName of adNames) {
             await page.getByRole('button', {name: 'Me connecter'}).click();
             await page.getByRole('link', {name: 'Gérer mes annonces de parrainage'}).click();
             const ads = await page.getByRole('link', {name: 'Voir plus'}).all();
-            const ad = await findAd(ads, adName);
-            if (!ad) {
-                expect(ad, `Should find add for name ${adName}`).toBeDefined();
+            let imageName = adName;
+            if (adName === "Boursorama Banque") {
+                imageName = "Boursobank";
             }
+            const ad = await findAd(ads, imageName);
             await ad.click()
             await page.getByRole('link', {name: 'Modifier'}).click();
             try {
