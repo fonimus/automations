@@ -2,8 +2,25 @@ import {expect, Locator, Page, test} from '@playwright/test';
 
 const domain = "www.1parrainage.com";
 
-const adNames = ["Nuki", "Boursobank", "Boursorama Banque"];
-const imageNames = {"Boursorama Banque": "Boursobank"}
+const adNames = [
+    "nuki",
+    "boursobank",
+    "boursorama banque",
+    "le fourgon",
+    "songmics home",
+    "cybex",
+    "smala",
+    "bankin",
+    "aime",
+    "choose",
+    "moo",
+    "hp instantink",
+];
+const imageNames = {
+    "boursorama banque": "boursobank",
+    "songmics home": "songmicshome2",
+    "hp instantink": "hpinstantinc",
+}
 
 type Account = {
     pseudo: string,
@@ -19,10 +36,10 @@ for (let account of process.env.ACCOUNTS.split(",")) {
 }
 const pseudoList = accounts.map(a => a.pseudo);
 
-async function findAd(ads: Array<Locator>, adName: string) {
+async function findAd(ads: Array<Locator>, imageName: string) {
     for (const ad of ads) {
         const imageSource = await ad.locator("..").locator("..").locator("..").locator("div").first().locator("img").getAttribute("src")
-        if (imageSource.toLowerCase().includes(adName.toLowerCase())) {
+        if (imageSource.toLowerCase().includes(imageName.replace(" ", "").toLowerCase())) {
             return ad
         }
     }
@@ -49,10 +66,7 @@ for (let adName of adNames) {
 
         await closeCookiesBanner(page);
 
-        await expect(page.getByRole('link', {
-            name: adName,
-            exact: true
-        })).toBeVisible();
+        await expect(page.getByText("Code promo de parrainage").first()).toBeVisible();
 
         const firstGodFather = await page.evaluate(() => {
             const ads = document.querySelectorAll(".coupon-list")
@@ -99,7 +113,8 @@ for (let adName of adNames) {
             const ad = await findAd(ads, imageName);
             if (!ad) {
                 console.log(`[${adName}] Ad not found for pseudo [${account.pseudo}] - aborting`)
-                return
+                await page.getByRole('link', {name: 'Quitter'}).first().click();
+                continue
             }
             await ad.click()
             await page.getByRole('link', {name: 'Modifier'}).click();
@@ -113,5 +128,6 @@ for (let adName of adNames) {
                 await page.getByRole('link', {name: 'Quitter'}).first().click();
             }
         }
+        console.log(`[${adName}] Unable to modify ad with any account - aborting`)
     });
 }
