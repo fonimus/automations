@@ -4,6 +4,7 @@ const domain = "www.1parrainage.com";
 
 const adNames = [
     "nuki",
+    "dailyn",
     "boursobank",
     "boursorama banque",
     "le fourgon",
@@ -17,6 +18,7 @@ const adNames = [
     "hp instantink",
 ];
 const imageNames = {
+    "dailyn": "daylin2",
     "boursorama banque": "boursobank",
     "songmics home": "songmicshome2",
     "hp instantink": "hpinstantinc",
