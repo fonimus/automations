@@ -3,19 +3,20 @@ import {expect, Locator, Page, test} from '@playwright/test';
 const domain = "www.1parrainage.com";
 
 const adNames = [
-    "nuki",
-    "dailyn",
-    "boursobank",
-    "boursorama banque",
-    "le fourgon",
-    "songmics home",
-    "cybex",
-    "smala",
-    "bankin",
-    "aime",
-    "choose",
-    "moo",
-    "hp instantink",
+    "stello",
+    // "nuki",
+    // "dailyn",
+    // "boursobank",
+    // "boursorama banque",
+    // "le fourgon",
+    // "songmics home",
+    // "cybex",
+    // "smala",
+    // "bankin",
+    // "aime",
+    // "choose",
+    // "moo",
+    // "hp instantink",
 ];
 const imageNames = {
     "dailyn": "daylin2",
@@ -51,6 +52,12 @@ async function findAd(ads: Array<Locator>, imageName: string) {
 async function closeCookiesBanner(page: Page) {
     try {
         await page.getByRole('button', {name: 'Tout accepter et continuer'}).click();
+        return
+    } catch (e) {
+        // nothing to do
+    }
+    try {
+        await page.getByRole('button', {name: 'Tout accepter'}).click();
         return
     } catch (e) {
         // nothing to do
