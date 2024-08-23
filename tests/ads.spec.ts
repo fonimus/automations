@@ -4,23 +4,19 @@ const domain = "www.1parrainage.com";
 
 const adNames = [
     "stello",
-    // "nuki",
-    // "dailyn",
-    // "boursobank",
-    // "boursorama banque",
-    // "le fourgon",
-    // "songmics home",
-    // "cybex",
-    // "smala",
-    // "bankin",
-    // "aime",
-    // "choose",
-    // "moo",
-    // "hp instantink",
+    "dailyn",
+    "le fourgon",
+    "songmics home",
+    "cybex",
+    "smala",
+    "bankin",
+    "aime",
+    "choose",
+    "moo",
+    "hp instantink",
 ];
 const imageNames = {
     "dailyn": "daylin2",
-    "boursorama banque": "boursobank",
     "songmics home": "songmicshome2",
     "hp instantink": "hpinstantinc",
 }
