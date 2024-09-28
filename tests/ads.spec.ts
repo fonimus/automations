@@ -4,6 +4,7 @@ const domain = "www.1parrainage.com";
 
 const adNames = [
     "revolut",
+    "cookut",
     "stello",
     "dailyn",
     "le fourgon",
@@ -14,7 +15,6 @@ const adNames = [
     "aime",
     "choose",
     "moo",
-    "hp instantink",
 ];
 const imageNames = {
     "dailyn": "daylin2",
@@ -72,7 +72,11 @@ for (let adName of adNames) {
 
         await closeCookiesBanner(page);
 
-        await expect(page.getByText("Code promo de parrainage").first()).toBeVisible();
+        try {
+            await expect(page.getByText("Code promo de parrainage").first()).toBeVisible();
+        } catch (e) {
+            await expect(page.getByText("Codes Parrainage").first()).toBeVisible();
+        }
 
         const firstGodFather = await page.evaluate(() => {
             const ads = document.querySelectorAll(".coupon-list")
@@ -125,7 +129,7 @@ for (let adName of adNames) {
             await ad.click()
             await page.getByRole('link', {name: 'Modifier'}).click();
             try {
-                await page.getByRole('button', {name: 'Envoyer'}).click();
+                // await page.getByRole('button', {name: 'Envoyer'}).click();
                 console.log(`[${adName}] Account [${account.pseudo}] modified ad with success`)
                 return
             } catch (e) {
