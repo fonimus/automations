@@ -129,7 +129,7 @@ for (let adName of adNames) {
             await ad.click()
             await page.getByRole('link', {name: 'Modifier'}).click();
             try {
-                // await page.getByRole('button', {name: 'Envoyer'}).click();
+                await page.getByRole('button', {name: 'Envoyer'}).click();
                 console.log(`[${adName}] Account [${account.pseudo}] modified ad with success`)
                 return
             } catch (e) {
