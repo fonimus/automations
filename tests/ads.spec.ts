@@ -5,6 +5,7 @@ const domain = "www.1parrainage.com";
 const adNames = [
     "revolut",
     "cookut",
+    "inga",
     "stello",
     "dailyn",
     "le fourgon",
