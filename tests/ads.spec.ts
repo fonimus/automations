@@ -112,13 +112,13 @@ for (let adName of adNames) {
 
         for (let account of accounts) {
             console.log(`[${adName}] Trying with account [${account.pseudo}]...`)
-            await page.getByRole('link', {name: 'Connexion'}).click();
+            await page.getByRole('link', {name: 'Se connecter'}).click();
             await page.locator('#_username').click();
             await page.locator('#_username').fill(account.email);
             await page.locator('#_password').click();
             await page.locator('#_password').fill(account.password);
-            await page.getByRole('button', {name: 'Me connecter'}).click();
-            await page.getByRole('link', {name: 'Gérer mes annonces de parrainage'}).click();
+            await page.getByRole('button', {name: 'Je me connecte'}).click();
+            await page.getByRole('link', {name: 'Gérer mes annonces'}).click();
             const ads = await page.getByRole('link', {name: 'Voir plus'}).all();
             let imageName = imageNames[adName] || adName;
             const ad = await findAd(ads, imageName);
