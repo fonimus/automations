@@ -18,6 +18,7 @@ const adNames = [
     "moo",
     "gamingamine"
 ];
+
 const imageNames = {
     "dailyn": "daylin2",
     "songmics home": "songmicshome2",
