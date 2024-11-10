@@ -16,6 +16,7 @@ const adNames = [
     "aime",
     "choose",
     "moo",
+    "gamingamine"
 ];
 const imageNames = {
     "dailyn": "daylin2",
@@ -124,7 +125,7 @@ for (let adName of adNames) {
             const ad = await findAd(ads, imageName);
             if (!ad) {
                 console.log(`[${adName}] Ad not found for pseudo [${account.pseudo}] - aborting`)
-                await page.getByRole('link', {name: 'Quitter'}).first().click();
+                await page.getByRole('link', {name: 'Se déconnecter'}).first().click();
                 continue
             }
             await ad.click()
