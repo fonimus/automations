@@ -138,7 +138,7 @@ for (let adName of adNames) {
             } catch (e) {
                 // next account
                 console.log(`[${adName}] Unable to modify ad with account [${account.pseudo}] - retrying with another account...`)
-                await page.getByRole('link', {name: 'Quitter'}).first().click();
+                await page.getByRole('link', {name: 'Se déconnecter'}).first().click();
             }
         }
         console.log(`[${adName}] Unable to modify ad with any account - aborting`)
