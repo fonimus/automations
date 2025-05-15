@@ -16,13 +16,15 @@ const adNames = [
     "aime",
     "choose",
     "moo",
-    "gamingamine"
+    "gamingamine",
+    "tape-a-l-oeil",
 ];
 
 const imageNames = {
     "dailyn": "daylin2",
     "songmics home": "songmicshome2",
     "hp instantink": "hpinstantinc",
+    "tape-a-l-oeil": "tapealoeil",
 }
 
 type Account = {
