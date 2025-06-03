@@ -18,6 +18,7 @@ const adNames = [
     "moo",
     "gamingamine",
     "tape-a-l-oeil",
+    "indy",
 ];
 
 const imageNames = {
