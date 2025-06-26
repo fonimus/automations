@@ -3,6 +3,7 @@ import {expect, Locator, Page, test} from '@playwright/test';
 const domain = "www.1parrainage.com";
 
 const adNames = [
+    "nuki",
     "revolut",
     "cookut",
     "inga",
