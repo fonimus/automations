@@ -20,6 +20,7 @@ const adNames = [
     "gamingamine",
     "tape-a-l-oeil",
     "indy",
+    "swapn",
 ];
 
 const imageNames = {
