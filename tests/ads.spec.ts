@@ -21,6 +21,9 @@ const adNames = [
     "tape-a-l-oeil",
     "indy",
     "swapn",
+    "kreme",
+    "The-Bradery",
+    "vendezvotrevoiture",
 ];
 
 const imageNames = {
@@ -28,6 +31,7 @@ const imageNames = {
     "songmics home": "songmicshome2",
     "hp instantink": "hpinstantinc",
     "tape-a-l-oeil": "tapealoeil",
+    "The-Bradery": "thebradery",
 }
 
 type Account = {
