@@ -24,6 +24,8 @@ const adNames = [
     "kreme",
     "The-Bradery",
     "vendezvotrevoiture",
+    "Direct-assurance",
+    "Bois-Energie-Nord",
 ];
 
 const imageNames = {
@@ -32,6 +34,8 @@ const imageNames = {
     "hp instantink": "hpinstantinc",
     "tape-a-l-oeil": "tapealoeil",
     "The-Bradery": "thebradery",
+    "Direct-assurance": "directassurance",
+    "Bois-Energie-Nord": "boisenergienord",
 }
 
 type Account = {
