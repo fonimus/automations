@@ -24,6 +24,8 @@ const adNames = [
     "kreme",
     "The-Bradery",
     "vendezvotrevoiture",
+    "Direct-assurance",
+    "Bois-Energie-Nord",
 ];
 
 const imageNames = {
@@ -32,6 +34,8 @@ const imageNames = {
     "hp instantink": "hpinstantinc",
     "tape-a-l-oeil": "tapealoeil",
     "The-Bradery": "thebradery",
+    "Direct-assurance": "directassurance",
+    "Bois-Energie-Nord": "boisenergienord",
 }
 
 type Account = {
@@ -87,7 +91,11 @@ for (let adName of adNames) {
         try {
             await expect(page.getByText("Code promo de parrainage").first()).toBeVisible();
         } catch (e) {
-            await expect(page.getByText("Codes Parrainage").first()).toBeVisible();
+            try {
+                await expect(page.getByText("Codes Parrainage").first()).toBeVisible();
+            } catch (e) {
+                await expect(page.getByText("Code Parrainage").first()).toBeVisible();
+            }
         }
 
         const firstGodFather = await page.evaluate(() => {
