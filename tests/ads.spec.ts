@@ -5,27 +5,24 @@ const domain = "www.1parrainage.com";
 const adNames = [
     "nuki",
     "revolut",
-    "cookut",
     "inga",
     "stello",
     "dailyn",
     "le fourgon",
     "songmics home",
-    "cybex",
     "smala",
-    "bankin",
-    "aime",
-    "choose",
-    "moo",
-    "gamingamine",
     "tape-a-l-oeil",
-    "indy",
     "swapn",
     "kreme",
     "The-Bradery",
     "vendezvotrevoiture",
     "Direct-assurance",
     "Bois-Energie-Nord",
+    "Asphalte",
+    // supprimées
+    // "cybex",
+    // "choose",
+    // "gamingamine",
 ];
 
 const imageNames = {
