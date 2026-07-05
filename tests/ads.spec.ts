@@ -19,6 +19,7 @@ const adNames = [
     "Direct-assurance",
     "Bois-Energie-Nord",
     "Asphalte",
+    "tiime",
     // supprimées
     // "cybex",
     // "choose",
