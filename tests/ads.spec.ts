@@ -20,6 +20,7 @@ const adNames = [
     "Bois-Energie-Nord",
     "Asphalte",
     "tiime",
+    "l expert comptable",
     // supprimées
     // "cybex",
     // "choose",
@@ -34,6 +35,7 @@ const imageNames = {
     "The-Bradery": "thebradery",
     "Direct-assurance": "directassurance",
     "Bois-Energie-Nord": "boisenergienord",
+    "l expert comptable": "lexpertcomptable",
 }
 
 type Account = {
